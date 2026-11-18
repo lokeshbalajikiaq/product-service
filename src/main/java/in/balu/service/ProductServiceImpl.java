@@ -4,6 +4,7 @@ import in.balu.dto.ProductRequestDto;
 import in.balu.dto.ProductResponseDto;
 import in.balu.models.Product;
 import in.balu.repository.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -18,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto addProduct(ProductRequestDto productRequestDto) {
-
+        log.info("ProductServiceImpl addProduct {}",productRequestDto.getName());
         Product product = new Product();
         BeanUtils.copyProperties(productRequestDto, product);
 
