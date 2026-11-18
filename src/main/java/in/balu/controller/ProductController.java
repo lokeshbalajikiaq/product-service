@@ -3,12 +3,14 @@ import in.balu.dto.ProductRequestDto;
 import in.balu.dto.ProductResponseDto;
 import in.balu.service.ProductService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
+@Slf4j
 public class ProductController {
 
     @Autowired
@@ -17,7 +19,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ProductResponseDto addProduct(@Valid @RequestBody ProductRequestDto productRequestDto) {
-
+        log.info("ProductController addProduct {}",productRequestDto.getName());
         return productService.addProduct(productRequestDto);
 
     }
@@ -25,7 +27,7 @@ public class ProductController {
     @GetMapping("/{productId}")
     @ResponseStatus(code = HttpStatus.OK)
     public ProductResponseDto getProduct(@PathVariable Long productId) {
-
+        log.info("ProductController getProduct {}",productId);
         return productService.getProductById(productId);
 
     }
@@ -33,9 +35,8 @@ public class ProductController {
     @GetMapping("/exists/{productId}")
     @ResponseStatus(code = HttpStatus.OK)
     public boolean isProductExists(@PathVariable Long productId) {
-
+        log.info("ProductController isProductExists {}",productId);
         return productService.isProductExists(productId);
-
     }
 
 }
